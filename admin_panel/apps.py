@@ -7,4 +7,5 @@ class AdminPanelConfig(AppConfig):
     verbose_name = 'Административная панель'
 
     def ready(self) -> None:
-        import admin_panel.signals
+        from backend import config
+        return super().ready()

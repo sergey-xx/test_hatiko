@@ -8,13 +8,5 @@ async def set_commands(bot: Bot):
             command='start',
             description='Вернутся в начало'
         ),
-        # BotCommand(
-        #     command='menu',
-        #     description='Вернутся в главное меню'
-        # ),
-        # BotCommand(
-        #     command='admin',
-        #     description='Зайти в админ-панель'
-        # )
     ]
     await bot.set_my_commands(commands)
