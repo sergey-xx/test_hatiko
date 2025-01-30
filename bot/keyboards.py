@@ -7,7 +7,7 @@ from aiogram_calendar.schemas import SimpleCalAct
 from bot.callbacks import (CategoryTranslator, LevelCallbackData,
                            MenuCallbackData, TraumaCallbackData,
                            TypeCallbackData, FormCallbackData)
-from bot.utils import get_day_training_list
+from bot.auth import get_day_training_list
 from users.models import TgUser, TrainingFormat, TrainingType
 from payments.models import PaymentMethod
 from liveconfigs.config import BUTT_CONFIG

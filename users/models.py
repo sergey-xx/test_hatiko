@@ -17,22 +17,15 @@ class TgUser(models.Model):
     )
     first_name = models.CharField(
         max_length=255,
-        verbose_name='Имя'
+        verbose_name='Имя',
+        blank=True,
+        null=True,
     )
     last_name = models.CharField(
         max_length=255,
-        verbose_name='Фамилия'
-    )
-    birth_date = models.DateField(
+        verbose_name='Фамилия',
         blank=True,
         null=True,
-        verbose_name='Дата рождения'
-    )
-    is_admin = models.BooleanField(default=False)
-    phone_number = PhoneNumberField(
-        blank=True,
-        null=True,
-        verbose_name='Номер телефона'
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -42,6 +35,7 @@ class TgUser(models.Model):
         auto_now=True,
         verbose_name='Дата обновления'
     )
+    is_active = models.BooleanField(default=False, verbose_name='Доступ разрешен')
 
     class Meta:
         verbose_name = 'Пользователь Telegram'

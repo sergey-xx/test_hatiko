@@ -34,17 +34,21 @@ class URL_CONFIG(BaseConfig):
     SITE_LINK_DESCRIPTION = "Настройка ссылки на сайт"
     SITE_LINK_TAGS = [ConfigTags.urls]
 
-    BOT_URL = settings.ENV.str('BOT_URL')
-    BOT_LINK_DESCRIPTION = "Настройка ссылки на этот бот"
-    BOT_LINK_LINK_TAGS = [ConfigTags.urls]
-
 
 class TEXT_CONFIG(BaseConfig):
     __topic__ = 'Настройки текстов'
 
-    HI_MSG: str = 'Рады приветствовать вас!'
+    HI_MSG: str = 'Рады приветствовать вас! Для доступа к боту обратитесь к администратору.'
     HI_MSG_DESCRIPTION = "Приветственное сообщение"
     HI_MSG_TAGS = [ConfigTags.text]
+
+    MENU_MSG: str = 'Отправьте IMEI, который хотите проверить.'
+    MENU_MSG_DESCRIPTION = "Приветственное сообщение"
+    MENU_MSG_TAGS = [ConfigTags.text]
+
+    ERROR_MSG: str = 'Произошла ошибка. Обратитесь к администратору.'
+    ERROR_MSG_DESCRIPTION = "Сообщение об ошибке сообщение"
+    ERROR_MSG_TAGS = [ConfigTags.text]
 
 
 class BUTT_CONFIG(BaseConfig):
@@ -53,3 +57,11 @@ class BUTT_CONFIG(BaseConfig):
     BACK: str = 'Назад'
     BACK_DESCRIPTION = "Текст кнопки Назад"
     BACK_TAGS = [ConfigTags.text]
+
+
+class PROJECT_CONFIG(BaseConfig):
+    __topic__ = 'Настройки текстов кнопок'
+
+    CHECKER_SERVICE_ID: int = 13
+    CHECKER_SERVICE_ID_DESCRIPTION = "ID сервиса по проверки IMAI"
+    CHECKER_SERVICE_ID_TAGS = [ConfigTags.basic]

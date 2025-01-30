@@ -1,7 +1,8 @@
-# django_aiogram_template
+# test_hatiko
 
-Шаблон для проекта на Django и aiogram
+Тестовое задание Хатико
 
+python 3.11
 
 Для запуска требуется установка docker и docker compose.
 

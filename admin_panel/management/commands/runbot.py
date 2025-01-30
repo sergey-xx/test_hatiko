@@ -13,7 +13,6 @@ from django.core.management import BaseCommand
 from bot.commands import set_commands
 from bot.handlers import start_router
 from bot.misc.logging import configure_logger
-from bot.misc.mailing import start_mailing
 
 ENV = settings.ENV
 REDIS_HOST = ENV.str('REDIS_HOST')
@@ -51,14 +50,6 @@ async def main():
     )
 
     scheduler.ctx.add_instance(bot, declared_class=Bot)
-
-    scheduler.add_job(
-        start_mailing,
-        'interval',
-        minutes=ENV.int('MAILING_PERIOD', 1),
-        replace_existing=True,
-        id='mailing'
-    )
 
     # scheduler.start()
     # scheduler.print_jobs()
