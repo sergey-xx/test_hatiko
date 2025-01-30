@@ -31,10 +31,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'djoser',
     'import_export',
-    'users.apps.UsersConfig',
-    'admin_panel.apps.AdminPanelConfig',
     'liveconfigs',
+    'users',
+    'admin_panel',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +148,14 @@ LC_MAX_STR_LENGTH_DISPLAYED_AS_TEXTINPUT = 50
 LC_ENABLE_PRETTY_INPUT = True
 LIVECONFIGS_SYNCWRITE = True
 LC_CACHE_TTL = 10
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}

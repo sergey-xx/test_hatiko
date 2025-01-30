@@ -45,7 +45,8 @@ class IMEI:
             async with session.post(url=url,
                                     headers=headers,
                                     json=payload) as resp:
-                if resp.status == 201:
+                self.status = resp.status
+                if resp.status in (201, 422):
                     data = await resp.json()
                     self.result = data
                 else:
