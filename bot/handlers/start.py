@@ -1,15 +1,15 @@
 import json
-from aiogram import Router, F
+
+from aiogram import F, Router
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
-from django.conf import settings
 from asgiref.sync import sync_to_async
+from django.conf import settings
 
-from backend.config import TEXT_CONFIG, PROJECT_CONFIG
-from users.models import TgUser
+from backend.config import PROJECT_CONFIG, TEXT_CONFIG
 from bot.auth import permission
-
+from users.models import TgUser
 from utils.imei_checker import IMEI
 
 ENV = settings.ENV
@@ -26,7 +26,7 @@ async def start(message: Message, state: FSMContext):
     ).afirst()
     if tg_user and tg_user.is_active:
         text = await sync_to_async(lambda: TEXT_CONFIG.MENU_MSG)()
-        await message.answer(text=text)
+        await message.answer(text)
         return
     elif not tg_user:
         await TgUser.objects.acreate(
@@ -40,7 +40,7 @@ async def start(message: Message, state: FSMContext):
         text = await sync_to_async(lambda: TEXT_CONFIG.MENU_MSG)()
     else:
         text = await sync_to_async(lambda: TEXT_CONFIG.HI_MSG)()
-    await message.answer(text=text)
+    await message.answer(text)
 
 
 @router.message(F.text)
@@ -55,9 +55,9 @@ async def check(message: Message, state: FSMContext):
     await imei.acheck()
     if not imei.result:
         text = await sync_to_async(lambda: TEXT_CONFIG.ERROR_MSG)()
-        await message.answer('Произошла ошибка. Обратитесь к администратору')
+        await message.answer(text)
         return
     text = ('<pre><code class="language-json">'
             f'{json.dumps(imei.result, indent=4)}'
             '</code></pre>')
-    await message.answer(text=text, parse_mode='HTML')
+    await message.answer(text, parse_mode='HTML')
