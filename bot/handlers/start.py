@@ -19,6 +19,8 @@ router = Router(name=__name__)
 @router.message(CommandStart())
 async def start(message: Message, state: FSMContext):
     await state.clear()
+    white_list = await sync_to_async(lambda: PROJECT_CONFIG.WHITE_LIST_IDS)()
+    is_active = message.from_user.id in white_list
     tg_user = await TgUser.objects.filter(
         telegram_id=message.from_user.id
     ).afirst()
@@ -32,9 +34,12 @@ async def start(message: Message, state: FSMContext):
             username=message.from_user.username,
             first_name=message.from_user.first_name,
             last_name=message.from_user.last_name,
-            is_active=False,
+            is_active=is_active,
         )
-    text = await sync_to_async(lambda: TEXT_CONFIG.HI_MSG)()
+    if is_active:
+        text = await sync_to_async(lambda: TEXT_CONFIG.MENU_MSG)()
+    else:
+        text = await sync_to_async(lambda: TEXT_CONFIG.HI_MSG)()
     await message.answer(text=text)
 
 

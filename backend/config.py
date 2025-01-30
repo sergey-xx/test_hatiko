@@ -65,3 +65,7 @@ class PROJECT_CONFIG(BaseConfig):
     CHECKER_SERVICE_ID: int = 13
     CHECKER_SERVICE_ID_DESCRIPTION = "ID сервиса по проверки IMAI"
     CHECKER_SERVICE_ID_TAGS = [ConfigTags.basic]
+
+    WHITE_LIST_IDS: list[int] = [int(x) for x in settings.ENV.list('WHITE_LIST_IDS')]
+    WHITE_LIST_IDS_DESCRIPTION = "Белый список ID Телеграм"
+    WHITE_LIST_IDS_TAGS = [ConfigTags.basic]
