@@ -36,6 +36,9 @@ sudo docker compose up -d --build
 В проекте используется библиотека django-liveconfigs, настраивать можно тут:
 /admin/liveconfigs/configrow/
 
+Белый список можно задать здесь (или позднее поставить галочку в профиле ТГ-пользователя):
+/admin/liveconfigs/configrow/WHITE_5FLIST_5FIDS/change/
+
 ## API
 
 Получить токен:

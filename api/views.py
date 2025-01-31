@@ -26,7 +26,7 @@ async def check_code(request):
     imei.validate()
     await imei.acheck()
     if imei.result:
-        return Response(data=imei.result, status=imei.status)
+        return Response(data=imei.result, status=imei.status_code)
     logger.error(f"IMEI check failed for code {code}: No result from service")
     return Response(
         data={'error': 'Server error'},

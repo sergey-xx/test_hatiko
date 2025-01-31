@@ -11,6 +11,7 @@ from backend.config import PROJECT_CONFIG, TEXT_CONFIG
 from bot.auth import permission
 from users.models import TgUser
 from utils.imei_checker import IMEI
+from utils.utils import prettify_text
 
 ENV = settings.ENV
 router = Router(name=__name__)
@@ -53,11 +54,8 @@ async def check(message: Message, state: FSMContext):
         await message.answer(text=text)
         return
     await imei.acheck()
-    if not imei.result:
-        text = await sync_to_async(lambda: TEXT_CONFIG.ERROR_MSG)()
-        await message.answer(text)
+    if imei.image_url:
+        text = prettify_text(imei.text)
+        await message.answer_photo(imei.image_url, text, parse_mode='HTML')
         return
-    text = ('<pre><code class="language-json">'
-            f'{json.dumps(imei.result, indent=4)}'
-            '</code></pre>')
-    await message.answer(text, parse_mode='HTML')
+    await message.answer(imei.text)
